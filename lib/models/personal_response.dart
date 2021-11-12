@@ -89,7 +89,7 @@ class PersonalElement {
   int escalafonId;
   int escalaJerarquicaId;
   int gradoId;
-  Nacionalidad nacionalidad;
+  String nacionalidad;
   String? domicilio;
   int provinciaId;
   int departamentoProvincialId;
@@ -124,6 +124,14 @@ class PersonalElement {
   CiudadElement ciudad;
   NivelEducativoClass nivelEducativo;
   SituacionClass situacion;
+
+  get fotoUrl {
+    if (this.foto.toString() != 'no-image.png') {
+      return this.foto.toString();
+    } else {
+      return 'https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png';
+    }
+  }
 
   factory PersonalElement.fromJson(String str) =>
       PersonalElement.fromMap(json.decode(str));

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:legajos_app/models/personal_response.dart';
+import 'package:legajos_app/providers/personal_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -25,18 +28,20 @@ class _CrearLista extends StatefulWidget {
 }
 
 class __CrearListaState extends State<_CrearLista> {
-  var _listaNumeros = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   @override
   Widget build(BuildContext context) {
-    return _lista();
+    final personalProvider = Provider.of<PersonalProvider>(context);
+    List<PersonalElement> listadoDePersonal = personalProvider.personal_list;
+    return _lista(listadoDePersonal);
   }
 
-  Widget _lista() {
+  Widget _lista(List<PersonalElement> lista) {
     return ListView.builder(
-        itemCount: _listaNumeros.length,
+        itemCount: lista.length,
         itemBuilder: (BuildContext context, int index) {
+          PersonalElement persona = lista[index];
           return Container(
-            margin: EdgeInsets.symmetric(vertical: 10.0),
+            margin: EdgeInsets.symmetric(vertical: 20.0),
             child: Column(
               children: [
                 GestureDetector(
@@ -44,14 +49,20 @@ class __CrearListaState extends State<_CrearLista> {
                     Navigator.pushNamed(context, 'details');
                   },
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: FadeInImage(
-                        placeholder: AssetImage('assets/loading.gif'),
-                        image: NetworkImage(
-                            'https://via.placeholder.com/200x200')),
-                  ),
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: FadeInImage(
+                          fit: BoxFit.fill,
+                          placeholder: AssetImage('assets/loading.gif'),
+                          image: NetworkImage(persona.fotoUrl))),
                 ),
-                Text('Nombre del Personal')
+                Text(
+                  '${persona.apellido1} ${persona.nombre1}',
+                  style: Theme.of(context).primaryTextTheme.bodyText1,
+                ),
+                Text(
+                  '${persona.grado.grado}',
+                  style: Theme.of(context).primaryTextTheme.caption,
+                )
               ],
             ),
           );

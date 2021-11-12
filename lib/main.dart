@@ -10,8 +10,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme:
-          ThemeData().copyWith(appBarTheme: AppBarTheme(color: Colors.green)),
+      theme: ThemeData().copyWith(
+          appBarTheme: AppBarTheme(color: Colors.green),
+          primaryTextTheme: TextTheme(
+              bodyText1: TextStyle(
+                  fontSize: 30.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+              caption: TextStyle(
+                fontSize: 20.0,
+                color: Colors.black,
+              ))),
       title: 'App de Personal',
       initialRoute: 'home',
       routes: {'home': (_) => HomeScreen(), 'details': (_) => DetailsScreen()},
