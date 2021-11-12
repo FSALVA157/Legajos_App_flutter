@@ -129,7 +129,7 @@ class PersonalElement {
     if (this.foto.toString() != 'no-image.png') {
       return this.foto.toString();
     } else {
-      return 'https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png';
+      return 'https://i.stack.imgur.com/GNhxO.png';
     }
   }
 
