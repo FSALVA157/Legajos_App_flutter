@@ -46,7 +46,7 @@ class __CrearListaState extends State<_CrearLista> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, 'details');
+                    Navigator.pushNamed(context, 'details', arguments: persona);
                   },
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(20.0),
