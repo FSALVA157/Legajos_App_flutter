@@ -66,7 +66,15 @@ class _PosterYData extends StatelessWidget {
             width: 10.0,
           ),
           Column(
-            children: [Text('Grado: ${this._persona.grado.grado}')],
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Grado: ${this._persona.grado.grado}',
+                style: Theme.of(context).textTheme.headline6,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              )
+            ],
           )
         ],
       ),
