@@ -36,6 +36,9 @@ class __CrearListaState extends State<_CrearLista> {
   }
 
   Widget _lista(List<PersonalElement> lista) {
+    var tamanio = MediaQuery.of(context).size;
+    final double ancho = tamanio.width;
+
     return ListView.builder(
         itemCount: lista.length,
         itemBuilder: (BuildContext context, int index) {
@@ -51,6 +54,8 @@ class __CrearListaState extends State<_CrearLista> {
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(20.0),
                       child: FadeInImage(
+                          width: (ancho * 50) / 100,
+                          height: (ancho * 50) / 100,
                           fit: BoxFit.fill,
                           placeholder: AssetImage('assets/loading.gif'),
                           image: NetworkImage(persona.fotoUrl))),
