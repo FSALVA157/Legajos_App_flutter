@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:legajos_app/models/personal_response.dart';
 import 'package:legajos_app/providers/personal_provider.dart';
+import 'package:legajos_app/search/personal_search_delegate.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -10,7 +11,10 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.search_off_outlined))
+            IconButton(
+                onPressed: () => showSearch(
+                    context: context, delegate: PersonalSearchDelegate()),
+                icon: Icon(Icons.search_off_outlined))
           ],
           title: const Center(
             child: Text('Aplicación de Personal'),
