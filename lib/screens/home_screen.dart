@@ -3,20 +3,37 @@ import 'package:legajos_app/models/personal_response.dart';
 import 'package:legajos_app/providers/personal_provider.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final miProvider = Provider.of<PersonalProvider>(context);
+    // List<PersonalElement> nuevoListado = miProvider.getPersonal();
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.search_off_outlined))
+            IconButton(onPressed: () {}, icon: Icon(Icons.search_off_outlined)),
+            IconButton(
+                onPressed: () {
+                  setState(() {
+                    print('PASANDO POR SETSTATE');
+                    miProvider.getPersonal();
+                  });
+                },
+                icon: Icon(Icons.replay_outlined))
           ],
           title: const Center(
             child: Text('Aplicación de Personal'),
           ),
         ),
-        body: _CrearLista());
+        body: _CrearLista(
+          key: UniqueKey(),
+        ));
   }
 }
 
