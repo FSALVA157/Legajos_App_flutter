@@ -5,11 +5,10 @@ import 'package:provider/provider.dart';
 
 class PersonalSearchDelegate extends SearchDelegate {
   //final BuildContext context;
-  List<PersonalElement> lista_completa = PersonalProvider().personal_list;
+  List<PersonalElement> lista_completa;
 
-  PersonalSearchDelegate() {
-    //PersonalProvider().getPersonal();
-    //this.lista_completa = PersonalProvider().personal_list;
+  PersonalSearchDelegate({required this.lista_completa}) {
+    print(this.lista_completa);
   }
 
   @override

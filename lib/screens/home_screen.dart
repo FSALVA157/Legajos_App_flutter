@@ -7,13 +7,18 @@ import 'package:provider/provider.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final personalProvider = Provider.of<PersonalProvider>(context);
+    List<PersonalElement> listaCompleta = personalProvider.personal_list;
+
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
           actions: [
             IconButton(
                 onPressed: () => showSearch(
-                    context: context, delegate: PersonalSearchDelegate()),
+                    context: context,
+                    delegate:
+                        PersonalSearchDelegate(lista_completa: listaCompleta)),
                 icon: Icon(Icons.search_off_outlined))
           ],
           title: const Center(
@@ -25,13 +30,15 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _CrearLista extends StatefulWidget {
-  _CrearLista({Key? key}) : super(key: key);
+  _CrearLista({Key? key}) : super(key: key) {}
 
   @override
   __CrearListaState createState() => __CrearListaState();
 }
 
 class __CrearListaState extends State<_CrearLista> {
+  __CrearListaState();
+
   @override
   Widget build(BuildContext context) {
     final personalProvider = Provider.of<PersonalProvider>(context);
