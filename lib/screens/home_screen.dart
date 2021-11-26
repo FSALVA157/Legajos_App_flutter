@@ -4,12 +4,19 @@ import 'package:legajos_app/providers/personal_provider.dart';
 import 'package:legajos_app/search/personal_search_delegate.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final personalProvider = Provider.of<PersonalProvider>(context);
     List<PersonalElement> listaCompleta = personalProvider.personal_list;
 
+    final miProvider = Provider.of<PersonalProvider>(context);
+    // List<PersonalElement> nuevoListado = miProvider.getPersonal();
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -19,13 +26,23 @@ class HomeScreen extends StatelessWidget {
                     context: context,
                     delegate:
                         PersonalSearchDelegate(lista_completa: listaCompleta)),
-                icon: Icon(Icons.search_off_outlined))
+                icon: Icon(Icons.search_off_outlined)),
+            IconButton(
+                onPressed: () {
+                  setState(() {
+                    print('PASANDO POR SETSTATE');
+                    miProvider.getPersonal();
+                  });
+                },
+                icon: Icon(Icons.replay_outlined))
           ],
           title: const Center(
             child: Text('Aplicación de Personal'),
           ),
         ),
-        body: _CrearLista());
+        body: _CrearLista(
+          key: UniqueKey(),
+        ));
   }
 }
 
