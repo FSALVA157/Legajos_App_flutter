@@ -30,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
             IconButton(
                 onPressed: () {
                   setState(() {
-                    print('PASANDO POR SETSTATE');
                     miProvider.getPersonal();
                   });
                 },
@@ -79,14 +78,17 @@ class __CrearListaState extends State<_CrearLista> {
                   onTap: () {
                     Navigator.pushNamed(context, 'details', arguments: persona);
                   },
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: FadeInImage(
-                          width: (ancho * 50) / 100,
-                          height: (ancho * 50) / 100,
-                          fit: BoxFit.fill,
-                          placeholder: AssetImage('assets/loading.gif'),
-                          image: NetworkImage(persona.fotoUrl))),
+                  child: Hero(
+                    tag: persona.legajo!,
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20.0),
+                        child: FadeInImage(
+                            width: (ancho * 50) / 100,
+                            height: (ancho * 50) / 100,
+                            fit: BoxFit.fill,
+                            placeholder: AssetImage('assets/loading.gif'),
+                            image: NetworkImage(persona.fotoUrl))),
+                  ),
                 ),
                 Text(
                   '${persona.apellido1} ${persona.nombre1}',

@@ -7,9 +7,7 @@ class PersonalSearchDelegate extends SearchDelegate {
   //final BuildContext context;
   List<PersonalElement> lista_completa;
 
-  PersonalSearchDelegate({required this.lista_completa}) {
-    print(this.lista_completa);
-  }
+  PersonalSearchDelegate({required this.lista_completa});
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -32,17 +30,65 @@ class PersonalSearchDelegate extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     if (query.isEmpty) {
-      return Container(
-        child: Center(
-          child:
-              Icon(Icons.person_off_outlined, color: Colors.black38, size: 100),
-        ),
-      );
+      return elementoVacio();
     } else {
-      print(this.lista_completa);
+      List<PersonalElement> listaResultado = this
+          .lista_completa
+          .where((persona) => persona.apellido1.contains(query))
+          .toList();
+
+      if (listaResultado.length == 0) {
+        return elementoVacio();
+      } else {
+        return _listViewResp(miLista: listaResultado);
+      }
       return Center(
         child: Text('HAY CONSULTA'),
       );
     }
+  }
+
+  Widget elementoVacio() {
+    return Container(
+      child: Center(
+        child:
+            Icon(Icons.person_off_outlined, color: Colors.black38, size: 100),
+      ),
+    );
+  }
+}
+
+class _listViewResp extends StatelessWidget {
+  List<PersonalElement> miLista;
+
+  _listViewResp({required this.miLista});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: miLista.length,
+        itemBuilder: (context, indice) {
+          PersonalElement persona = this.miLista[indice];
+          return ListTile(
+            title: Text(
+              '${miLista[indice].apellido1} ${miLista[indice].nombre1} ${miLista[indice].nombre2}',
+              style: Theme.of(context).textTheme.headline6,
+              textAlign: TextAlign.center,
+            ),
+            subtitle: Text(
+              '${miLista[indice].grado.grado}',
+              style: Theme.of(context).textTheme.subtitle2,
+              textAlign: TextAlign.center,
+            ),
+            leading: FadeInImage(
+                width: 100,
+                placeholder: AssetImage('assets/no-image.jpg'),
+                image: NetworkImage(miLista[indice].fotoUrl)),
+            onTap: () {
+              Navigator.pushNamed(context, 'details', arguments: persona);
+            },
+            trailing: Icon(Icons.arrow_forward),
+          );
+        });
   }
 }

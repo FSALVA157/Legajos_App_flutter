@@ -56,12 +56,15 @@ class _PosterYData extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: FadeInImage(
-                width: 150.0,
-                placeholder: AssetImage('assets/loading.gif'),
-                image: NetworkImage(this._persona.fotoUrl)),
+          Hero(
+            tag: this._persona.legajo!,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: FadeInImage(
+                  width: 150.0,
+                  placeholder: AssetImage('assets/loading.gif'),
+                  image: NetworkImage(this._persona.fotoUrl)),
+            ),
           ),
           SizedBox(
             width: 10.0,
