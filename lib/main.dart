@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData().copyWith(
           appBarTheme: AppBarTheme(color: Colors.green),
-          primaryTextTheme: TextTheme(
+          primaryTextTheme: const TextTheme(
               bodyText1: TextStyle(
                   fontSize: 30.0,
                   color: Colors.black,
@@ -22,8 +22,12 @@ class MyApp extends StatelessWidget {
                 color: Colors.black,
               ))),
       title: 'App de Personal',
-      initialRoute: 'home',
-      routes: {'home': (_) => HomeScreen(), 'details': (_) => DetailsScreen()},
+      initialRoute: 'access',
+      routes: {
+        'home': (_) => HomeScreen(),
+        'details': (_) => DetailsScreen(),
+        'access': (_) => AccessScreen()
+      },
     );
   }
 }

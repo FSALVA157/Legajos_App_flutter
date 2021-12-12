@@ -1,5 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.legajos_app">
+    
+  <!-- agregado para uso de local_auth - verificacion dactilar -->
+<uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+
+
    <application
         android:label="legajos_app"
         android:icon="@mipmap/ic_launcher">
